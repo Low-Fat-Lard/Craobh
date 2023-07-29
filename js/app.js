@@ -3,11 +3,11 @@ async function navigateTo(page) {
   let htmlContent = '';
 
   try {
-    const response = await fetch(`./html/${page}.html`);
-    htmlContent = await response.text();
-    if(page == "home") {
+    if(page == 'home') {
       runHome();
     }  
+    const response = await fetch(`./html/${page}.html`);
+    htmlContent = await response.text();
   } catch (error) {
     htmlContent = '<h1>Page Not Found</h1><p>The requested page was not found.</p>';
   }
@@ -16,5 +16,7 @@ async function navigateTo(page) {
 }  
 
 function runHome() {
-  document.getElementById("home").innerHTML = "tree"
+  document.getElementById("home").innerHTML = 'portal'
 }
+
+navigateTo('home')
