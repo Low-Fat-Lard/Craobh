@@ -41,7 +41,7 @@ const displayBlogLinks = async () => {
      blogData.forEach((blog, index) => {
       const button = document.createElement("li");
       button.innerHTML = blog.title;
-      document.getElementById("home").appendChild(button);
+      document.getElementById("home").innerHTML += button;
     }); 
     }
 }
