@@ -4,31 +4,21 @@ async function navigateTo(page, key) {
   const content = document.getElementById('content');
   let htmlContent = '';
 
-  if (pageCache[page]) {
-    // Load from cache if available
-    htmlContent = pageCache[page];
-  } else {
-    try {
-      let response = await fetch(`./html/${key}/${page}.html`);
-      if (response.ok) {
-        htmlContent = await response.text();
-        pageCache[page] = htmlContent;
-      } else {
-        response = await fetch(`./404.html`);
-        htmlContent = await response.text();
-        pageCache[page] = htmlContent;
-      }
-    } catch (error) {
-        response = await fetch(`./404.html`);
-        htmlContent = await response.text();
-        pageCache[page] = htmlContent;
-    }
+  try {
+    const response = await fetch(`./html/${key}/${page}.html`);
+    htmlContent = response.ok ? await response.text() : await fetch(`./404.html`).then(res => res.text());
+    pageCache[page] = { content: htmlContent, key: key };
+  } catch (error) {
+    htmlContent = await fetch(`./404.html`).then(res => res.text());
+    pageCache[page] = { content: htmlContent, key: key };
   }
+
   content.innerHTML = htmlContent;
-  if(page == 'home' && htmlContent != '') {
-      displayBlogLinks();
+  if (page === 'home' && htmlContent !== '') {
+    displayBlogLinks();
   }
 }
+
 
 const fetchBlogData = async () => {
     try {
