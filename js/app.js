@@ -17,7 +17,7 @@ async function navigateTo(page, key) {
   if (page === 'home' && htmlContent !== '') {
     displayBlogLinks();
   } else if (page === 'quiz' && htmlContent !== '') {
-    displayQuizLink();
+    displayQuizLinks();
   }
 }
 
