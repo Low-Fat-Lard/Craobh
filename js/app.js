@@ -40,7 +40,7 @@ const displayBlogLinks = async () => {
     blogData.forEach((blog, index) => {
       const button = document.createElement("li");
       button.innerHTML = blog.title;
-      button.addEventListener('click') = navigateTo(blog.url);
+      button.onclick(navigateTo(blog.url));
       document.getElementById("home").appendChild(button);
     });
 }
