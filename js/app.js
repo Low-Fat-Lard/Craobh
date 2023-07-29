@@ -8,8 +8,10 @@ async function navigateTo(page) {
   } catch (error) {
     htmlContent = '<h1>Page Not Found</h1><p>The requested page was not found.</p>';
   }
-
   content.innerHTML = htmlContent;
+  if(page == 'home' && htmlContent != '') {
+      runHome();
+  }
 }  
 
 function runHome() {
