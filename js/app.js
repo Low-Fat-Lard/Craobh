@@ -47,4 +47,4 @@ const displayBlogLinks = async () => {
     });
 }
 
-navigateTo('home')
+navigateTo('homeu')
