@@ -5,6 +5,7 @@ async function navigateTo(page) {
   try {
     const response = await fetch(`../html/${page}.html`);
     htmlContent = await response.text();
+    console.log(htmlContent)
   } catch (error) {
     htmlContent = '<h1>Page Not Found</h1><p>The requested page was not found.</p>';
   }
