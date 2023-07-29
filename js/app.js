@@ -16,6 +16,8 @@ async function navigateTo(page, key) {
   content.innerHTML = htmlContent;
   if (page === 'home' && htmlContent !== '') {
     displayBlogLinks();
+  } else if (page === 'quiz' && htmlContent !== '') {
+    displayQuiz();
   }
 }
 
@@ -31,6 +33,16 @@ const fetchBlogData = async () => {
     }
 };
 
+const fetchQuizData = async () => {
+  const storedReviews = localStorage.getItem('reviews');
+  return storedReviews ? JSON.parse(storedReviews, (key, value) => {
+    if (key === 'nextReviewDate') {
+      return new Date(value);
+    }
+    return key === 'streak' ? parseInt(value, 10) : value;
+  }) : [];
+};
+
 const displayBlogLinks = async () => {
     const blogData = await fetchBlogData();  
     blogData.forEach((blog, index) => {
@@ -40,6 +52,24 @@ const displayBlogLinks = async () => {
         navigateTo(blog.url, 'pages');
       };
       document.getElementById("home").appendChild(button);
+    });
+}
+
+const displayQuizLinks = async () => {
+    const localStorage = await fetchQuizData();  
+    let quizData = [];
+    if(localStorage.length > 0) {
+      quizData = localStorage;
+    } else {
+      quizData = await fetchBlogData();
+    }
+    quizData.forEach((blog, index) => {
+      const button = document.createElement("button");
+      button.innerHTML = blog.title;
+      button.onclick = function() {
+        navigateTo(blog.url, 'pages');
+      };
+      document.getElementById("reviewList").appendChild(button);
     });
 }
 
