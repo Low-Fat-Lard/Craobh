@@ -10,9 +10,6 @@ async function navigateTo(page) {
   }
 
   content.innerHTML = htmlContent;
-  if(page == 'home') {
-    runHome();
-  }  
 }  
 
 function runHome() {
