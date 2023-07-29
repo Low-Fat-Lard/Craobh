@@ -20,7 +20,7 @@ async function navigateTo(page) {
   }
   content.innerHTML = htmlContent;
   if(page == 'home' && htmlContent != '') {
-      runHome();
+      displayBlogLinks();
   }
 }
 
@@ -35,7 +35,7 @@ const fetchBlogData = async () => {
     }
 };
 
-function runHome() {
+const displayBlogLinks = async () => {
     const blogData = await fetchBlogData();  
     blogData.forEach((blog, index) => {
       const button = document.createElement("li");
