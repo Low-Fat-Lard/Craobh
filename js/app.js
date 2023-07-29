@@ -3,9 +3,6 @@ async function navigateTo(page) {
   let htmlContent = '';
 
   try {
-    if(page == 'home') {
-      runHome();
-    }  
     const response = await fetch(`./html/${page}.html`);
     htmlContent = await response.text();
   } catch (error) {
@@ -13,6 +10,9 @@ async function navigateTo(page) {
   }
 
   content.innerHTML = htmlContent;
+  if(page == 'home') {
+    runHome();
+  }  
 }  
 
 function runHome() {
