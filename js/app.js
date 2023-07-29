@@ -38,11 +38,10 @@ const fetchBlogData = async () => {
 const displayBlogLinks = async () => {
     const blogData = await fetchBlogData();  
     blogData.forEach((blog, index) => {
-      if (document.getElementById("home")) {
       const button = document.createElement("li");
       button.innerHTML = blog.title;
       document.getElementById("home").appendChild(button);
-    })
+    });
 }
 
 navigateTo('home')
