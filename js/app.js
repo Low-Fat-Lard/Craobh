@@ -9,7 +9,7 @@ async function navigateTo(page) {
     htmlContent = pageCache[page];
   } else {
     try {
-      const response = await fetch(`${page}.html`);
+      const response = await fetch(`./html/${page}.html`);
       htmlContent = await response.text();
 
       // Cache the fetched HTML content
