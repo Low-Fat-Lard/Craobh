@@ -38,7 +38,7 @@ const fetchBlogData = async () => {
 const displayBlogLinks = async () => {
     const blogData = await fetchBlogData();  
     blogData.forEach((blog, index) => {
-      const button = document.createElement("li");
+      const button = document.createElement("button");
       button.innerHTML = blog.title;
       document.getElementById("home").appendChild(button);
     });
