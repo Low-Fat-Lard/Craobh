@@ -10,12 +10,14 @@ async function navigateTo(page, key) {
   } else {
     try {
       const response = await fetch(`./html/${key}/${page}.html`);
-      htmlContent = await response.text();
-
-      // Cache the fetched HTML content
-      pageCache[page] = htmlContent;
+      if (response.ok) {
+        htmlContent = await response.text();
+        pageCache[page] = htmlContent;
+      } else {
+        htmlContent = await fetch(`./404.html`);
+      }
     } catch (error) {
-      htmlContent = '<h1>Page Not Found</h1><p>The requested page was not found.</p>';
+        htmlContent = await fetch(`./404.html`);
     }
   }
   content.innerHTML = htmlContent;
