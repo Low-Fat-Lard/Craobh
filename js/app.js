@@ -3,7 +3,7 @@ async function navigateTo(page) {
   let htmlContent = '';
 
   try {
-    const response = await fetch(`../html/${page}.html`);
+    const response = await fetch(`./html/${page}.html`);
     htmlContent = await response.text();
     console.log(htmlContent)
   } catch (error) {
