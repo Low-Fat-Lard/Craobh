@@ -1,6 +1,6 @@
 const pageCache = {};
 
-async function navigateTo(page) {
+async function navigateTo(page, key) {
   const content = document.getElementById('content');
   let htmlContent = '';
 
@@ -9,7 +9,7 @@ async function navigateTo(page) {
     htmlContent = pageCache[page];
   } else {
     try {
-      const response = await fetch(`./html/${page}.html`);
+      const response = await fetch(`./html/${key}/${page}.html`);
       htmlContent = await response.text();
 
       // Cache the fetched HTML content
@@ -41,10 +41,10 @@ const displayBlogLinks = async () => {
       const button = document.createElement("button");
       button.innerHTML = blog.title;
       button.onclick = function() {
-        navigateTo(blog.url);
+        navigateTo(blog.url, 'pages');
       };
       document.getElementById("home").appendChild(button);
     });
 }
 
-navigateTo('homeu')
+navigateTo('home', 'home')
