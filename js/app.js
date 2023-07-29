@@ -9,15 +9,19 @@ async function navigateTo(page, key) {
     htmlContent = pageCache[page];
   } else {
     try {
-      const response = await fetch(`./html/${key}/${page}.html`);
+      let response = await fetch(`./html/${key}/${page}.html`);
       if (response.ok) {
         htmlContent = await response.text();
         pageCache[page] = htmlContent;
       } else {
-        htmlContent = await fetch(`./404.html`);
+        response = await fetch(`./404.html`);
+        htmlContent = await response.text();
+        pageCache[page] = htmlContent;
       }
     } catch (error) {
-        htmlContent = await fetch(`./404.html`);
+        response = await fetch(`./404.html`);
+        htmlContent = await response.text();
+        pageCache[page] = htmlContent;
     }
   }
   content.innerHTML = htmlContent;
